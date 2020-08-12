@@ -66,7 +66,7 @@ longpoll = VkBotLongPoll(vk_session, 1234) # 1234 - ID группы (число)
 while True:
     for event in longpoll.listen():
         if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text: #event.obj.text - event.text
-            messagetext=event.obj.text.split()
+            messagetext=event.obj.text.strip()
             try:      
                 if chkmsg(messagetext, ["кто такой тагир?", "кто такой тагир", "кто такой iamtagir?", "кто такой iamtagir"]):
                     sendmess(iamtagir)
