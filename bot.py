@@ -13,7 +13,7 @@ def sendmess(msg):
         vk.messages.send(peer_id=event.obj.peer_id, message=msg, random_id=random.randint(1, 2147483647), keyboard=menu)
 
 def chkmsg(msg, txt):
-    msgtxt=re.sub("@tlachatbot ", "", msg)
+    msgtxt=msg.replace("@tlachatbot", "")
     for s in txt:
         if s==msgtxt.lower():
             return True
@@ -139,5 +139,5 @@ while True:
                     print(spameggs)                                            
             except Exception as E:
                 print(E)
-                sendmess("Привет! У бота ошибка. Перешли это сообщение @dikeyoficial или @thenextpageofyou\nОшибка:\n"+str(E))
+                sendmess(f"Привет! У бота ошибка. Перешли это сообщение @dikey_oficial или @thenextpageofyou\nОшибка:\n {E}")
                 time.sleep(1)
