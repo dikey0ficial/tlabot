@@ -64,79 +64,80 @@ vk = vk_session.get_api()
 longpoll = VkBotLongPoll(vk_session, 1234) # 1234 - ID группы (число)
 
 while True:
-	for event in longpoll.listen():
-	    if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text: #event.obj.text - event.text
-	        try:      
-	            if chkmsg(event.obj.text, ["кто такой тагир?", "кто такой тагир", "кто такой iamtagir?", "кто такой iamtagir"]):
-	                sendmess(iamtagir)
-	                print('iamtagir')
-	            elif chkmsg(event.obj.text, ["команды","помощь"]):
-	                sendmess(help)
-	                print('help')
-	            elif chkmsg(event.obj.text, ["привет","ghbdtn","здравствуйте"]):
-	                sendmess("здрасьте")
-	                print('hello')
-	            elif chkmsg(event.obj.text, ["пока","gjrf","до свидания"]):
-	                sendmess('Пока(')
-	                print('goodbye')
-	            elif chkmsg(event.obj.text, ["что такое тимран","что такое тимран?","что такое teamrun?","что такое teamrun","teamrun это","тимран это"]):
-	                sendmess(teamrun)
-	                print('tr')
-	            elif chkmsg(event.obj.text, ["tla это","тла это","что такое тла?","что такое tla?","что такое тла","что такое tla"]):
-	                sendmess(tla)
-	                print('tla')
-	            elif chkmsg(event.obj.text, ["про тла1","про tla1","про тла 1","про tla 1"]):
-	                sendmess(tla1)
-	                print('tla1')
-	            elif chkmsg(event.obj.text, ['про tla2', 'про тла2', 'про tla 2', 'про тла 2']):
-	                sendmess(tla2)
-	                print('tla2')
-	            elif chkmsg(event.obj.text, ["про тла3","про tla3","про тла 3","про tla 3"]):
-	                sendmess(tla3)
-	                print('tla3')
-	            elif chkmsg(event.obj.text, ["про тла4","про tla4","про тла 4","про tla 4"]):
-	                sendmess(tla4)
-	                print('tla4')
-	            elif chkmsg(event.obj.text, ["про тла5","про tla5","про тла 5","про tla 5"]):
-	                sendmess(tla5)
-	                print('tla5')
-	            elif chkmsg(event.obj.text, ["кто такой афоня","кто такая изольда","кто такой афоня?","кто такая изольда?","про афоню","про изольду","про героев тла","про героев tla"]):
-	                sendmess(heroes)
-	                print('heroes')
-	            elif chkmsg(event.obj.text, ["ссылки"]):
-	                sendmess(links)
-	                print('links')
-	            elif chkmsg(event.obj.text, ["про бота", "про tlabot"]):
-	                sendmess(about)
-	                print('about')
-	            elif chkmsg(event.obj.text, ["qwe"]):
-	                qwe+=1
-	                ft-=1
-	                sendmess('за qwe: '+str(qwe)+'; за 42: '+str(ft)+';')
-	                print('qwe')
-	                if qwe%100==0 and qwe!=0:
-	                        sendmess('Вы юбилейный qwe!')
-	                        print('qwe100')
-	                        if qwe>=100:
-	                            sendmess('qwe выиграли!')
-	                            qwe=0
-	                            ft=0
-	            elif chkmsg(event.obj.text, ["42"]):
-	                ft+=1
-	                qwe-=1
-	                sendmess('за qwe: '+str(qwe)+'; за 42: '+str(ft)+';')
-	                print('ft')
-	                if ft%100==0 and ft!=0:
-	                        sendmess('Вы юбилейный 42!')
-	                        print('ft100')
-	                        if ft>=100:
-	                            sendmess('эээ виграли!')
-	                            qwe=0
-	                            ft=0
-	            else:
-	                time.sleep(1)
-	                print(spameggs)                                            
-	        except Exception as E:
-	            print(E)
-	            sendmess("Привет! У бота ошибка. Перешли это сообщение @dikeyoficial или @thenextpageofyou\nОшибка:\n"+str(E))
-	            time.sleep(1)
+    for event in longpoll.listen():
+        if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text: #event.obj.text - event.text
+            messagetext=event.obj.text.split()
+            try:      
+                if chkmsg(messagetext, ["кто такой тагир?", "кто такой тагир", "кто такой iamtagir?", "кто такой iamtagir"]):
+                    sendmess(iamtagir)
+                    print('iamtagir')
+                elif chkmsg(messagetext, ["команды","помощь"]):
+                    sendmess(help)
+                    print('help')
+                elif chkmsg(messagetext, ["привет","ghbdtn","здравствуйте"]):
+                    sendmess("здрасьте")
+                    print('hello')
+                elif chkmsg(messagetext, ["пока","gjrf","до свидания"]):
+                    sendmess('Пока(')
+                    print('goodbye')
+                elif chkmsg(messagetext, ["что такое тимран","что такое тимран?","что такое teamrun?","что такое teamrun","teamrun это","тимран это"]):
+                    sendmess(teamrun)
+                    print('tr')
+                elif chkmsg(messagetext, ["tla это","тла это","что такое тла?","что такое tla?","что такое тла","что такое tla"]):
+                    sendmess(tla)
+                    print('tla')
+                elif chkmsg(messagetext, ["про тла1","про tla1","про тла 1","про tla 1"]):
+                    sendmess(tla1)
+                    print('tla1')
+                elif chkmsg(messagetext, ['про tla2', 'про тла2', 'про tla 2', 'про тла 2']):
+                    sendmess(tla2)
+                    print('tla2')
+                elif chkmsg(messagetext, ["про тла3","про tla3","про тла 3","про tla 3"]):
+                    sendmess(tla3)
+                    print('tla3')
+                elif chkmsg(messagetext, ["про тла4","про tla4","про тла 4","про tla 4"]):
+                    sendmess(tla4)
+                    print('tla4')
+                elif chkmsg(messagetext, ["про тла5","про tla5","про тла 5","про tla 5"]):
+                    sendmess(tla5)
+                    print('tla5')
+                elif chkmsg(messagetext, ["кто такой афоня","кто такая изольда","кто такой афоня?","кто такая изольда?","про афоню","про изольду","про героев тла","про героев tla"]):
+                    sendmess(heroes)
+                    print('heroes')
+                elif chkmsg(messagetext, ["ссылки"]):
+                    sendmess(links)
+                    print('links')
+                elif chkmsg(messagetext, ["про бота", "про tlabot"]):
+                    sendmess(about)
+                    print('about')
+                elif chkmsg(messagetext, ["qwe"]):
+                    qwe+=1
+                    ft-=1
+                    sendmess('за qwe: '+str(qwe)+'; за 42: '+str(ft)+';')
+                    print('qwe')
+                    if qwe%100==0 and qwe!=0:
+                            sendmess('Вы юбилейный qwe!')
+                            print('qwe100')
+                            if qwe>=100:
+                                sendmess('qwe выиграли!')
+                                qwe=0
+                                ft=0
+                elif chkmsg(messagetext, ["42"]):
+                    ft+=1
+                    qwe-=1
+                    sendmess('за qwe: '+str(qwe)+'; за 42: '+str(ft)+';')
+                    print('ft')
+                    if ft%100==0 and ft!=0:
+                            sendmess('Вы юбилейный 42!')
+                            print('ft100')
+                            if ft>=100:
+                                sendmess('эээ виграли!')
+                                qwe=0
+                                ft=0
+                else:
+                    time.sleep(1)
+                    print(spameggs)                                            
+            except Exception as E:
+                print(E)
+                sendmess("Привет! У бота ошибка. Перешли это сообщение @dikeyoficial или @thenextpageofyou\nОшибка:\n"+str(E))
+                time.sleep(1)
