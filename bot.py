@@ -1,4 +1,4 @@
-from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
+from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType 
 from vk_api.keyboard import VkKeyboard
 from messages import *
 import vk_api, json, time, random, re
@@ -6,13 +6,19 @@ import vk_api, json, time, random, re
 qwe=0
 ft=0
 
+with open('login.txt') as login:
+     token, gr_id=[line.strip() for line in login]
+     gr_id=int(gr_id)
+
 def sendmess(msg):
+    #отправляет сообщение
     if event.from_user:
-        vk.messages.send(peer_id=event.obj.peer_id, message=msg, random_id=random.randint(1, 2147483647), keyboard=[])
-    else:
         vk.messages.send(peer_id=event.obj.peer_id, message=msg, random_id=random.randint(1, 2147483647), keyboard=menu)
+    else:
+        vk.messages.send(peer_id=event.obj.peer_id, message=msg, random_id=random.randint(1, 2147483647), keyboard=None)
 
 def chkmsg(msg, txt):
+    #проверяет, есть ли $msg в $txt
     msgtxt=msg.replace("@tlachatbot", "")
     for s in txt:
         if s==msgtxt.lower():
@@ -20,7 +26,7 @@ def chkmsg(msg, txt):
             break
 
 
-vk_session = vk_api.VkApi(token='token') #Токен вашей группы
+vk_session = vk_api.VkApi(token=token)
 
 #interface 
 menu = VkKeyboard()
@@ -59,13 +65,13 @@ menu.add_button(label="Про бота")
 
 menu = menu.get_keyboard()
 
-vk_session = vk_api.VkApi(token="token")
+vk_session = vk_api.VkApi(token=token)
 vk = vk_session.get_api()
-longpoll = VkBotLongPoll(vk_session, 1234) # 1234 - ID группы (число)
+longpoll = VkBotLongPoll(vk_session, gr_id)
 
 while True:
     for event in longpoll.listen():
-        if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text: #event.obj.text - event.text
+        if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text:
             messagetext=event.obj.text.strip()
             try:      
                 if chkmsg(messagetext, ["кто такой тагир?", "кто такой тагир", "кто такой iamtagir?", "кто такой iamtagir"]):
@@ -113,27 +119,29 @@ while True:
                 elif chkmsg(messagetext, ["qwe"]):
                     qwe+=1
                     ft-=1
-                    sendmess('за qwe: '+str(qwe)+'; за 42: '+str(ft)+';')
-                    print('qwe')
-                    if qwe%100==0 and qwe!=0:
-                            sendmess('Вы юбилейный qwe!')
-                            print('qwe100')
-                            if qwe>=100:
-                                sendmess('qwe выиграли!')
-                                qwe=0
-                                ft=0
+                    if event.from_user==False:
+                        sendmess(f'за qwe: {qwe}; за 42: {ft} ;')
+                        print('qwe')
+                        if qwe%100==0 and qwe!=0:
+                                sendmess('Вы юбилейный qwe!')
+                                print('qwe100')
+                                if qwe>=100:
+                                    sendmess('qwe выиграли!')
+                                    qwe=0
+                                    ft=0
                 elif chkmsg(messagetext, ["42"]):
                     ft+=1
                     qwe-=1
-                    sendmess('за qwe: '+str(qwe)+'; за 42: '+str(ft)+';')
-                    print('ft')
-                    if ft%100==0 and ft!=0:
-                            sendmess('Вы юбилейный 42!')
-                            print('ft100')
-                            if ft>=100:
-                                sendmess('эээ виграли!')
-                                qwe=0
-                                ft=0
+                    if event.from_user==False:
+                        sendmess(f'за qwe: {qwe}; за 42: {ft};')
+                        print('ft')
+                        if ft%100==0 and ft!=0:
+                                sendmess('Вы юбилейный 42!')
+                                print('ft100')
+                                if ft>=100:
+                                    sendmess('эээ виграли!')
+                                    qwe=0
+                                    ft=0
                 else:
                     time.sleep(1)
                     print(spameggs)                                            
