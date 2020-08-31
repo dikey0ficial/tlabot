@@ -25,7 +25,7 @@ heroes=["В этом платформере всего два героя, и о�
 
 links="Группа VK TLA: - https://vk.com/thatlevelagain\nСайт TLA - http://thatlevelagain.ru\nМагазин мерча TLA - http://tla.myprintbar.ru/\nДискорд TLA - https://discord.gg/KHfRgbk\nТелеграм-чат — http://t.me/thatlevelagainchat\nВК-чат — http://vk.me/join/AJQ1d3YG6xcGGxy7CimsUgp1"
 
-jokes=["Привет дефективным, остальным соболезную",]
+jokes=["Привет дефективным, остальным соболезную",
     ]
 
 spameggs="spam"
