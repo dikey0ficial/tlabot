@@ -12,14 +12,20 @@ with open('login.txt') as login:
 
 def sendmess(msg):
     #отправляет сообщение
-    if event.from_user:
-        vk.messages.send(peer_id=event.obj.peer_id, message=msg, random_id=random.randint(1, 2147483647), keyboard=menu)
+    if type(msg)==list:
+        msgtxt=random.choice(msg)
+    elif type(msg)==str:
+        msgtxt=msg
     else:
-        vk.messages.send(peer_id=event.obj.peer_id, message=msg, random_id=random.randint(1, 2147483647), keyboard=None)
+        msgtxt=str(msg)
+    if event.from_user:
+        vk.messages.send(peer_id=event.obj.peer_id, message=msgtxt, random_id=random.randint(1, 2147483647), keyboard=menu)
+    else:
+        vk.messages.send(peer_id=event.obj.peer_id, message=msgtxt, random_id=random.randint(1, 2147483647), keyboard={})
 
 def chkmsg(msg, txt):
     #проверяет, есть ли $msg в $txt
-    msgtxt=msg.replace("@tlachatbot", "")
+    msgtxt=msg.replace("[tlachatbot|@tlachatbot] ", "")
     for s in txt:
         if s==msgtxt.lower():
             return True
