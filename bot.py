@@ -3,6 +3,7 @@ from vk_api.keyboard import VkKeyboard
 from messages import *
 import vk_api, json, time, random, re
 
+
 qwe=0
 ft=0
 
@@ -21,7 +22,7 @@ def sendmess(msg):
     if event.from_user:
         vk.messages.send(peer_id=event.obj.peer_id, message=msgtxt, random_id=random.randint(1, 2147483647), keyboard=menu)
     else:
-        vk.messages.send(peer_id=event.obj.peer_id, message=msgtxt, random_id=random.randint(1, 2147483647), keyboard={})
+        vk.messages.send(peer_id=event.obj.peer_id, message=msgtxt, random_id=random.randint(1, 2147483647), keyboard=None)
 
 def chkmsg(msg, txt):
     #проверяет, есть ли $msg в $txt
@@ -75,6 +76,8 @@ vk_session = vk_api.VkApi(token=token)
 vk = vk_session.get_api()
 longpoll = VkBotLongPoll(vk_session, gr_id)
 
+print('logged in')
+
 while True:
     for event in longpoll.listen():
         if event.type == VkBotEventType.MESSAGE_NEW and event.obj.text:
@@ -125,7 +128,7 @@ while True:
                 elif chkmsg(messagetext, ["qwe"]):
                     qwe+=1
                     ft-=1
-                    if event.from_user==False:
+                    if event.from_user==True:
                         sendmess(f'за qwe: {qwe}; за 42: {ft} ;')
                         print('qwe')
                         if qwe%100==0 and qwe!=0:
@@ -138,7 +141,7 @@ while True:
                 elif chkmsg(messagetext, ["42"]):
                     ft+=1
                     qwe-=1
-                    if event.from_user==False:
+                    if event.from_user==True:
                         sendmess(f'за qwe: {qwe}; за 42: {ft};')
                         print('ft')
                         if ft%100==0 and ft!=0:
